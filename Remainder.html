@@ -1,0 +1,175 @@
+
+
+
+<html>
+<style>
+* {
+    box-sizing: border-box;
+  }
+  
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  
+  ul li {
+    cursor:pointer;
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    background:rgb(37, 204, 18);
+    font-size: 18px;
+    transition: 0.2s;
+  
+    
+  }
+  
+  ul li:nth-child(even) {
+    background: #f9f9f9;
+  }
+  
+  ul li:hover {
+    background: rgb(36, 214, 60)
+  }
+  
+  ul li.checked {
+    background: rgb(230, 107, 107);
+    color: rgb(36, 8, 8);
+    text-decoration: line-through;
+  }
+  
+  ul li.checked::before {
+    content: '';
+    position: absolute;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    top: 10px;
+    left: 16px;
+    height: 14px;
+    width: 7px;
+  }
+  
+  .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+  }
+  
+  .close:hover {
+    background-color: #e6190a;
+    color: rgb(14, 1, 1);
+  }
+  
+  .header {
+    background-color: #fffbfa;
+    padding: 30px 40px;
+    color: rgb(0, 0, 0);
+    text-align: center;
+  }
+  
+  .header:after {
+    content: "";
+    display: flex;
+    clear: both;
+  }
+  
+  input {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    width: 75%;
+    padding: 10px;
+    float: left;
+    font-size: 16px;
+  }
+  
+  .addBtn {
+    padding: 10px;
+    width: 25%;
+    background: #d60909;
+    color: rgb(221, 204, 12);
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .5s;
+    border-radius: 5px;
+    outline: #158ddd;
+  }
+  
+  .addBtn:hover {
+    background-color: rgb(83, 77, 77);
+  }
+  </style>
+<body>
+<div id="tab" class="header">
+  <h2>Remainder List</h2>
+  <input type="text" id="listing" placeholder="Type Here!!">
+  <span onclick="highlightes()" class="addBtn">Add</span>
+</div>
+
+<ul id="newUL">
+  <li>Morning Drink</li>
+  <li>Yoga</li>
+  <li>Meet MR.Ram</li>
+  <li>Go To Bank</li>
+  <li>Call Papa</li>
+  <li>Book Table for Dinner</li>
+</ul>
+
+<script>
+    var myNodelist = document.getElementsByTagName("LI");
+    var i;
+    for (i = 0; i < myNodelist.length; i++) {
+      var span = document.createElement("SPAN");
+      var txt = document.createTextNode("\u00D7");
+      span.className = "close";
+      span.appendChild(txt);
+      myNodelist[i].appendChild(span);
+    }
+    
+    var close = document.getElementsByClassName("close");
+    var i;
+    for (i = 0; i < close.length; i++) {
+      close[i].onclick = function() {
+        var div = this.parentElement;
+        div.style.display = "none";
+      }
+    }
+    
+    var list = document.querySelector('ul');
+    list.addEventListener('click', function(ev) {
+      if (ev.target.tagName === 'LI') {
+        ev.target.classList.toggle('checked');
+      }
+    }, false);
+    
+    function highlightes() {
+      var li = document.createElement("li");
+      var inputValue = document.getElementById("listing").value;
+      var t = document.createTextNode(inputValue);
+      li.appendChild(t);
+      if (inputValue === '') {
+        alert("You must write something!");
+      } else {
+        document.getElementById("newUL").appendChild(li);
+      }
+      document.getElementById("listing").value = "";
+    
+      var span = document.createElement("SPAN");
+      var txt = document.createTextNode("\u00D7");
+      span.className = "close";
+      span.appendChild(txt);
+      li.appendChild(span);
+    
+      for (i = 0; i < close.length; i++) {
+        close[i].onclick = function() {
+          var div = this.parentElement;
+          div.style.display = "none";
+        }
+      }
+    }
+    </script>
+    </body>
+</html>
